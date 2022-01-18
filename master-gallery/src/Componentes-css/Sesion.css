@@ -1,0 +1,101 @@
+.img-sesion, .content {
+    display: inline-block;
+}
+
+.content-box {
+    width: 500px;
+    height: 300px;
+    background-color: white;
+    box-shadow: 4px 6px 5px #555555;
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+}
+
+.content {
+    text-align: center;
+    display: grid;
+    grid-template-rows: 1.5fr 3fr .5fr;
+    grid-template-columns: 1fr;
+    gap: 10px;
+    justify-items: center;
+    box-shadow: 0px 3px 4px rgba(0, 0, 0, 0.25);
+}
+
+.img-sesion {
+    width: 100%;
+    height: 100%;
+    background-image: url('../img-sesion.jpg');
+    background-repeat: round;
+    
+    box-sizing: border-box;
+}
+
+.logo {
+    grid-row: 1/2;
+    align-self: flex-end;
+}
+
+h4, h2 {
+    margin: 4px 0px;
+    color: tomato;
+}
+
+.form-sesion {
+    grid-row: 2/3;
+}
+
+h4,h2:hover {
+    cursor: default;
+}
+
+.input {
+    display: block;
+    margin: 20px;
+    border: none;
+    padding: 5px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    background-color: #E0DEDE;
+}
+
+
+
+::placeholder {
+    color: #9b9b9b;
+    opacity: 1; /* Firefox */
+  }
+  
+  :-ms-input-placeholder { /* Internet Explorer 10-11 */
+   color: #9b9b9b;
+  }
+  
+  ::-ms-input-placeholder { /* Microsoft Edge */
+   color: #9b9b9b;
+  }
+
+.submit-button {
+    margin: 10px 0px;
+    padding: 5px 10px;
+    border-radius: 50px;
+    border: 2px solid #8142FF;
+    box-shadow: 1px 1px 5px #424242;
+    cursor: pointer;
+    transition: color .5s;
+    transition: background-color .5s;
+}
+
+.submit-button:hover {
+    background-color: #8142FF;
+    color: white;
+}
+
+.link-signup {
+    grid-row: 3/4;
+}
+
+.link-signup a {
+    color: #49C1DB;
+}
+
+.link-signup a:hover {
+    color: #35879b;
+}
