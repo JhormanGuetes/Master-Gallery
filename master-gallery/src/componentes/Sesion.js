@@ -12,8 +12,8 @@ export default class Sesion extends Component {
                     <div className='img-sesion'></div>
                     <div className='content'>
                         <div className='logo'>
-                            <h4>MASTER</h4>
-                            <h2>GALLERY</h2>
+                            <p className='logo1'>Master</p>
+                            <p className='logo2'>Gallery</p>
                         </div>
                         <form className='form-sesion'>
                             <input className='input' type='email' placeholder='Correo'></input>
