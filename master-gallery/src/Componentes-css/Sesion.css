@@ -42,26 +42,10 @@
     align-self: flex-end;
 }
 
-.logo1, .logo2 {
-    margin: 0px;
+.logo img {
     padding: 0px;
-    color: #FC9918;
-}
-
-.logo1 {
-    position: relative;
-    top: 13px;
-    font-family: 'Birthstone', cursive;
-    font-size: 30px;
-}
-
-.logo2 {
-    font-family: 'Roboto Slab', serif;
-    font-size: 30px;
-}
-
-.tittle-logo {
-    font-family: 'Quando', serif;
+    width: 115px;
+    bottom: 13px;
 }
 
 .form-sesion {
@@ -111,6 +95,10 @@ p:hover {
     color: white;
 }
 
+.submit-button:active {
+    transform: scale(96%);
+}
+
 .link-signup {
     grid-row: 3/4;
 }
@@ -119,8 +107,10 @@ p:hover {
     color: #49C1DB;
     font-family: 'Roboto Slab', serif;
     font-size: 13px;
+    cursor: pointer;
 }
 
 .link-signup a:hover {
     color: #35879b;
+    text-decoration: underline;
 }
