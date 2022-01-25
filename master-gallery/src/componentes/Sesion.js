@@ -3,17 +3,15 @@ import Usuario from './Usuario';
 import '../Componentes-css/background.css';
 import '../Componentes-css/Sesion.css';
 import firebaseApp from '../config/Firebase_config';
-import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
-import { getFirestore, doc, getDoc } from 'firebase/firestore';
+import { getAuth, signInWithEmailAndPassword, updateProfile } from 'firebase/auth';
+//import { getFirestore, doc, getDoc } from 'firebase/firestore';
 
 const auth = getAuth(firebaseApp);
-const firestore = getFirestore(firebaseApp);
+//const firestore = getFirestore(firebaseApp);
 
 export default function Sesion() {
     const [registerEmail, setRegisterEmail] = useState("");
     const [registerContraseña, setRegisterContraseña] = useState("");
-
-    const [objUsuario, setObjUsuario] = useState(null);
 
     const iniciarSesion = async (e) => {
         e.preventDefault();
@@ -23,16 +21,17 @@ export default function Sesion() {
             try{
                 const infoUsuario = await signInWithEmailAndPassword(auth, registerEmail, registerContraseña);
 
-                const docuRef = doc(firestore, `usuarios/${infoUsuario.user.uid}`);
-                const docuCifrada = await getDoc(docuRef);
-                const infoFinal = docuCifrada.data().nombre;
+                //const docuRef = doc(firestore, `usuarios/${infoUsuario.user.uid}`);
+                //const docuCifrada = await getDoc(docuRef);
+                //const infoFinal = docuCifrada.data().nombre;
+                
+                //setObjUsuario(infoUsuario);
 
-                const usuarioDatos = {
-                    uid: infoUsuario.user.uid,
-                    email: infoUsuario.user.email,
-                    name: infoFinal,
-                };
-                setObjUsuario(usuarioDatos);
+                //const usuarioDatos = {
+                //    uid: infoUsuario.user.uid,
+                //    email: infoUsuario.user.email,
+                //    name: infoFinal,
+                //};
 
             }catch (error){
                 alert(error.code);
@@ -43,7 +42,6 @@ export default function Sesion() {
 
     return(
         <>
-            {objUsuario && <Usuario user={ objUsuario } />}
             <div className='container-box'>
                 <div className='content-box'>
                     <div className='img-sesion'></div>
@@ -66,6 +64,7 @@ export default function Sesion() {
                     </div>
                 </div>
             </div>
+            {auth.currentUser && <Usuario user={ auth.currentUser } />}
         </>
     )
 }

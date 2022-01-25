@@ -2,8 +2,9 @@ import React, { useState } from 'react';
 import '../Componentes-css/background.css';
 import '../Componentes-css/Sesion.css';
 import firebaseApp from '../config/Firebase_config';
-import { getAuth, createUserWithEmailAndPassword, sendEmailVerification } from 'firebase/auth';
+import { getAuth, createUserWithEmailAndPassword, sendEmailVerification, updateProfile } from 'firebase/auth';
 import { getFirestore, doc, setDoc } from 'firebase/firestore';
+import validarEmail from './validarEmail';
 
 const auth = getAuth(firebaseApp);
 const firestore = getFirestore(firebaseApp);
@@ -17,22 +18,29 @@ export default function Registro()  {
     const registrarUsuario = async (e) => {
         e.preventDefault();
 
-        let campoVacio = (registerNombre && registerEmail && registerContraseña && registerContraseña2) ? true : alert('Campo(s) Vacio(s)');
-        if (campoVacio) {
-            let isEqual = (registerContraseña === registerContraseña2) ? true : alert('Las contraseñas no coinciden');
-            if (isEqual) {
-                try{
-                    const infoUsuario = await createUserWithEmailAndPassword(auth, registerEmail, registerContraseña);
-                    console.log(infoUsuario);
-                    const docuRef = doc(firestore, `usuarios/${infoUsuario.user.uid}`);
-                    await setDoc(docuRef, { correo: registerEmail, nombre: registerNombre })
-                    const user = auth.currentUser;
-                    const envioCorreo = await sendEmailVerification(user);
-                    window.location.href = './respuesta';
-                }catch (error){
-                    alert(error.code);
-                    console.log(error.message);
+        let camposllenos = (registerNombre && registerEmail && registerContraseña && registerContraseña2) ? true : alert('Campo(s) Vacio(s)');
+        if (camposllenos) {
+            if (validarEmail( registerEmail )) {
+                let isEqual = (registerContraseña === registerContraseña2) ? true : alert('Las contraseñas no coinciden');
+                if (isEqual) {
+                    try{
+                        const infoUsuario = await createUserWithEmailAndPassword(auth, registerEmail, registerContraseña);
+                        await updateProfile(infoUsuario.user, { displayName: registerNombre });
+
+                        //console.log(auth.currentUser);
+                        //const docuRef = doc(firestore, `usuarios/${infoUsuario.user.uid}`);
+                        //await setDoc(docuRef, { correo: registerEmail, nombre: registerNombre });
+                        
+                        const user = auth.currentUser;
+                        const envioCorreo = await sendEmailVerification(user);
+                        window.location.href = './respuesta';
+                    }catch (error){
+                        alert(error.code);
+                        console.log(error.message);
+                    }
                 }
+            } else{
+                alert('Correo no valido');
             }
         }
     };

@@ -5,6 +5,7 @@ import firebaseApp from './config/Firebase_config';
 import Sesion from './componentes/Sesion';
 import Registro from './componentes/Registro';
 import Respuesta from './componentes/Respuesta';
+import Usuario from './componentes/Usuario';
 import './App.css';
 
 const auth = getAuth(firebaseApp);
